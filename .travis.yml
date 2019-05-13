@@ -5,6 +5,7 @@ dist: trusty
 cache:
   cargo: true
   apt: true
+  timeout: 6000
 
 matrix:
   include:
