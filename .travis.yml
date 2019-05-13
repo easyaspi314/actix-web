@@ -26,7 +26,7 @@ before_install:
 
 before_cache: |
   if [[ "$TRAVIS_RUST_VERSION" == "nightly-2019-05-12" ]]; then
-    RUSTFLAGS="--cfg procmacro2_semver_exempt" cargo install -f cargo-tarpaulin
+    RUSTFLAGS="--cfg procmacro2_semver_exempt" cargo install cargo-tarpaulin
   fi
 
 # Add clippy
