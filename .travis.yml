@@ -37,7 +37,10 @@ before_script:
 script:
   - cargo update
   - cargo check --all --no-default-features
-  - cargo test --all-features --all -- --nocapture
+  - |
+    if [[ "$TRAVIS_RUST_VERSION" -ne "nightly-2019-05-12" ]]; then
+      cargo test --all-features --all -- --nocapture
+    fi
 
 # Upload docs
 after_success:
