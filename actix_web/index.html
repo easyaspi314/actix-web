@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `actix_web` crate."><meta name="keywords" content="rust, rustlang, rust-lang, actix_web"><title>actix_web - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../actix_web/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate actix_web</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all actix_web's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'actix_web', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/actix_web/lib.rs.html#1-232' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>actix_web</a></span></h1><div class='docblock'><p>Actix web is a small, pragmatic, and extremely fast web framework
+for Rust.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">actix_web</span>::{<span class="ident">web</span>, <span class="ident">App</span>, <span class="ident">Responder</span>, <span class="ident">HttpServer</span>};
+
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">index</span>(<span class="ident">info</span>: <span class="ident">web</span>::<span class="ident">Path</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">u32</span>)<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Responder</span> {
+    <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Hello {}! id:{}&quot;</span>, <span class="ident">info</span>.<span class="number">0</span>, <span class="ident">info</span>.<span class="number">1</span>)
+}
+
+<span class="attribute">#[<span class="ident">actix_rt</span>::<span class="ident">main</span>]</span>
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="ident">HttpServer</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">App</span>::<span class="ident">new</span>().<span class="ident">service</span>(
+        <span class="ident">web</span>::<span class="ident">resource</span>(<span class="string">&quot;/{name}/{id}/index.html&quot;</span>).<span class="ident">to</span>(<span class="ident">index</span>))
+    )
+        .<span class="ident">bind</span>(<span class="string">&quot;127.0.0.1:8080&quot;</span>)<span class="question-mark">?</span>
+        .<span class="ident">run</span>()
+        .<span class="kw">await</span>
+}</pre></div>
+<h2 id="documentation--community-resources" class="section-header"><a href="#documentation--community-resources">Documentation &amp; community resources</a></h2>
+<p>Besides the API documentation (which you are currently looking
+at!), several other resources are available:</p>
+<ul>
+<li><a href="https://actix.rs/docs/">User Guide</a></li>
+<li><a href="https://gitter.im/actix/actix">Chat on gitter</a></li>
+<li><a href="https://github.com/actix/actix-web">GitHub repository</a></li>
+<li><a href="https://crates.io/crates/actix-web">Cargo package</a></li>
+</ul>
+<p>To get started navigating the API documentation you may want to
+consider looking at the following pages:</p>
+<ul>
+<li>
+<p><a href="struct.App.html">App</a>: This struct represents an actix-web
+application and is used to configure routes and other common
+settings.</p>
+</li>
+<li>
+<p><a href="struct.HttpServer.html">HttpServer</a>: This struct
+represents an HTTP server instance and is used to instantiate and
+configure servers.</p>
+</li>
+<li>
+<p><a href="web/index.html">web</a>: This module
+provides essential helper functions and types for application registration.</p>
+</li>
+<li>
+<p><a href="struct.HttpRequest.html">HttpRequest</a> and
+<a href="struct.HttpResponse.html">HttpResponse</a>: These structs
+represent HTTP requests and responses and expose various methods
+for inspecting, creating and otherwise utilizing them.</p>
+</li>
+</ul>
+<h2 id="features" class="section-header"><a href="#features">Features</a></h2>
+<ul>
+<li>Supported <em>HTTP/1.x</em> and <em>HTTP/2.0</em> protocols</li>
+<li>Streaming and pipelining</li>
+<li>Keep-alive and slow requests handling</li>
+<li><code>WebSockets</code> server/client</li>
+<li>Transparent content compression/decompression (br, gzip, deflate)</li>
+<li>Configurable request routing</li>
+<li>Multipart streams</li>
+<li>SSL support with OpenSSL or <code>native-tls</code></li>
+<li>Middlewares (<code>Logger</code>, <code>Session</code>, <code>CORS</code>, <code>DefaultHeaders</code>)</li>
+<li>Supports <a href="https://github.com/actix/actix">Actix actor framework</a></li>
+<li>Supported Rust version: 1.39 or later</li>
+</ul>
+<h2 id="package-feature" class="section-header"><a href="#package-feature">Package feature</a></h2>
+<ul>
+<li><code>client</code> - enables http client (default enabled)</li>
+<li><code>compress</code> - enables content encoding compression support (default enabled)</li>
+<li><code>openssl</code> - enables ssl support via <code>openssl</code> crate, supports <code>http/2</code></li>
+<li><code>rustls</code> - enables ssl support via <code>rustls</code> crate, supports <code>http/2</code></li>
+<li><code>secure-cookies</code> - enables secure cookies support, includes <code>ring</code> crate as
+dependency</li>
+</ul>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="body/index.html" title='actix_web::body mod'>body</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="client/index.html" title='actix_web::client mod'>client</a></td><td class='docblock-short'><p>An HTTP Client</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="cookie/index.html" title='actix_web::cookie mod'>cookie</a></td><td class='docblock-short'><p>https://github.com/alexcrichton/cookie-rs fork</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="dev/index.html" title='actix_web::dev mod'>dev</a></td><td class='docblock-short'><p>The <code>actix-web</code> prelude for library developers</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="error/index.html" title='actix_web::error mod'>error</a></td><td class='docblock-short'><p>Error and Result module</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="guard/index.html" title='actix_web::guard mod'>guard</a></td><td class='docblock-short'><p>Route match guards.</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="http/index.html" title='actix_web::http mod'>http</a></td><td class='docblock-short'><p>Various HTTP related types</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="middleware/index.html" title='actix_web::middleware mod'>middleware</a></td><td class='docblock-short'><p>Middlewares</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="test/index.html" title='actix_web::test mod'>test</a></td><td class='docblock-short'><p>Various helpers for Actix applications to use during testing.</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="web/index.html" title='actix_web::web mod'>web</a></td><td class='docblock-short'><p>Essentials helper functions and types for application registration.</p>
+</td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr class='module-item'><td><a class="struct" href="struct.App.html" title='actix_web::App struct'>App</a></td><td class='docblock-short'><p>Application builder - structure that follows the builder pattern
+for building application instances.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Error.html" title='actix_web::Error struct'>Error</a></td><td class='docblock-short'><p>General purpose actix web error.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.HttpRequest.html" title='actix_web::HttpRequest struct'>HttpRequest</a></td><td class='docblock-short'><p>An HTTP Request</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.HttpResponse.html" title='actix_web::HttpResponse struct'>HttpResponse</a></td><td class='docblock-short'><p>An HTTP Response</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.HttpServer.html" title='actix_web::HttpServer struct'>HttpServer</a></td><td class='docblock-short'><p>An HTTP Server.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Resource.html" title='actix_web::Resource struct'>Resource</a></td><td class='docblock-short'><p><em>Resource</em> is an entry in resources table which corresponds to requested URL.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Route.html" title='actix_web::Route struct'>Route</a></td><td class='docblock-short'><p>Resource route definition</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Scope.html" title='actix_web::Scope struct'>Scope</a></td><td class='docblock-short'><p>Resources scope.</p>
+</td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr class='module-item'><td><a class="enum" href="enum.Either.html" title='actix_web::Either enum'>Either</a></td><td class='docblock-short'><p>Combines two different responder types into a single type</p>
+</td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table><tr class='module-item'><td><a class="trait" href="trait.FromRequest.html" title='actix_web::FromRequest trait'>FromRequest</a></td><td class='docblock-short'><p>Trait implemented by types that can be extracted from request.</p>
+</td></tr><tr class='module-item'><td><a class="trait" href="trait.HttpMessage.html" title='actix_web::HttpMessage trait'>HttpMessage</a></td><td class='docblock-short'><p>Trait that implements general purpose operations on http messages</p>
+</td></tr><tr class='module-item'><td><a class="trait" href="trait.Responder.html" title='actix_web::Responder trait'>Responder</a></td><td class='docblock-short'><p>Trait implemented by types that can be converted to a http response.</p>
+</td></tr><tr class='module-item'><td><a class="trait" href="trait.ResponseError.html" title='actix_web::ResponseError trait'>ResponseError</a></td><td class='docblock-short'><p>Error that can be converted to <code>Response</code></p>
+</td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table><tr class='module-item'><td><a class="type" href="type.Result.html" title='actix_web::Result type'>Result</a></td><td class='docblock-short'><p>A specialized <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>
+for actix web operations</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "actix_web";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
